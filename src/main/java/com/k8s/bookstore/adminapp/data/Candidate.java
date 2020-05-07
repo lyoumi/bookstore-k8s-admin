@@ -34,8 +34,7 @@ public class Candidate {
     private Integer age;
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @JsonBackReference
-    private List<Skill> skills = new ArrayList<>();
+    private List<Skill> skills;
     @OneToOne(cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "address_id", referencedColumnName = "id")

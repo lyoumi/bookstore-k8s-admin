@@ -4,8 +4,10 @@ import com.k8s.bookstore.adminapp.data.Candidate;
 import com.k8s.bookstore.adminapp.data.Skill;
 import com.k8s.bookstore.adminapp.repository.CandidateRepository;
 import com.k8s.bookstore.adminapp.service.CandidateService;
+import com.k8s.bookstore.adminapp.service.CountryUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,12 @@ public class CandidateServiceImpl implements CandidateService {
         for (Skill skill : skills) {
             candidate.addSkill(skill);
         }
+
+        Optional.ofNullable(candidate.getAddress())
+            .ifPresent(address ->
+                address.setCountry(CountryUtil.getCountryByCode(address.getCountry()))
+            );
+
         return candidateRepository.saveAndFlush(candidate);
     }
 

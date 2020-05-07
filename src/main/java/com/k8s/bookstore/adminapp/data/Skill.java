@@ -1,5 +1,6 @@
 package com.k8s.bookstore.adminapp.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -24,6 +25,7 @@ public class Skill {
     private String name;
     @Column(name = "level")
     private String level;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
